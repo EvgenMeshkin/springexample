@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.activeandroid.query.Select;
 
@@ -12,11 +13,13 @@ import com.activeandroid.query.Select;
 public class MainActivity extends ActionBarActivity implements ISpringCallback<Data.Resut[]>{
 
     public static final String JSON_URL = "https://www.dropbox.com/s/zh8dkf0p5ia0cny/generated.json?dl=1";
+    private TextView viewText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewText = (TextView)findViewById(R.id.viewText);
         new SpringParser().executeInThread(this, JSON_URL);
     }
 
@@ -46,7 +49,8 @@ public class MainActivity extends ActionBarActivity implements ISpringCallback<D
         Log.d("****************", data.toString());
         data[0].save();
         Data.Resut retrievedItem = new Select().from(Data.Resut.class).executeSingle();
-        Log.d("****************", retrievedItem.name + retrievedItem.email);
+        Log.d("****************", retrievedItem.name + retrievedItem.email + retrievedItem.address);
+        viewText.setText(retrievedItem.name + "/n" + retrievedItem.email + "/n" + retrievedItem.address);
 
     }
 

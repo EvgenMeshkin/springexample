@@ -22,14 +22,11 @@ public class SpringParser {
             public void run() {
                 try {
                     String url = params[0];
-
                     MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
                     mappingJackson2HttpMessageConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", MappingJackson2HttpMessageConverter.DEFAULT_CHARSET)));
-
                     RestTemplate restTemplate = new RestTemplate();
                     restTemplate.getMessageConverters().add(mappingJackson2HttpMessageConverter);
                     final Data.Resut[] result = restTemplate.getForObject(url, Data.Resut[].class);
-                    Log.d("************r*************", result[0].name);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
