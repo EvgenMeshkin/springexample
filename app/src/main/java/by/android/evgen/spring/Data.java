@@ -16,12 +16,11 @@ public class Data {
 
     @Table(name = "KeyValue")
     public static class Resut extends Model {
-
-        @Column(name = "index")
+//      @Column(name = "index")
         public String index;
         @Column(name = "about")
         public String about;
-        @Column(name = "_id")
+//       @Column(name = "_id")
         public String _id;
         @Column(name = "name")
         public String name;

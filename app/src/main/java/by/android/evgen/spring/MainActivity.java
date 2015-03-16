@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.activeandroid.query.Select;
 
 
-public class MainActivity extends ActionBarActivity implements ISpringCallback<Data.Resut[]>{
+public class MainActivity extends ActionBarActivity implements ISpringCallback<Data.Resut[]> {
 
     public static final String JSON_URL = "https://www.dropbox.com/s/zh8dkf0p5ia0cny/generated.json?dl=1";
     private TextView viewText;
@@ -19,7 +19,7 @@ public class MainActivity extends ActionBarActivity implements ISpringCallback<D
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        viewText = (TextView)findViewById(R.id.viewText);
+        viewText = (TextView) findViewById(R.id.viewText);
         new SpringParser().executeInThread(this, JSON_URL);
     }
 
@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements ISpringCallback<D
         if (id == R.id.action_settings) {
             return true;
         }
-       return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -46,11 +46,9 @@ public class MainActivity extends ActionBarActivity implements ISpringCallback<D
 
     @Override
     public void onDone(Data.Resut[] data) {
-        Log.d("****************", data.toString());
         data[0].save();
         Data.Resut retrievedItem = new Select().from(Data.Resut.class).executeSingle();
-        Log.d("****************", retrievedItem.name + retrievedItem.email + retrievedItem.address);
-        viewText.setText(retrievedItem.name + "/n" + retrievedItem.email + "/n" + retrievedItem.address);
+        viewText.setText(retrievedItem.name + "\n" + retrievedItem.email + "\n" + retrievedItem.address);
 
     }
 
